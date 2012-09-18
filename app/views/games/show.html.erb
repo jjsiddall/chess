@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<button id="appendMe">test</button>
+
+
+
+
+
+<div id="board" data-game_id="<%= @game.id %>">
+  <% 8.downto(1) do |number| %>
+    
+	<div class="rank">
+	  <% ('a'..'h').each_with_index do |file, i| %>
+	    <div class="square <%= (number + i).even? ? nil : "dark_square" %>" id="<%= file %><%= number %>">
+	      
+	    </div>
+	  <% end %>
+	</div>
+
+
+  <% end %>
+</div>
+
+
+
+<%= link_to 'Edit', edit_game_path(@game) %> |
+<%= link_to 'Back', games_path %>
