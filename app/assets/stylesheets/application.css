@@ -2,7 +2,7 @@
 #board {
   border: thick solid #1D7373;
   height: 600px;  width: 600px;
-  margin: 36px auto;
+  margin: auto;
 
 }
 .square {
@@ -16,17 +16,20 @@
 }
 
 .piece {
-  font-size:400%;
+  font-size:50px;
+  padding-left: 12px; 
+  position:absolute;
+
  }
 
 .white {
   color: grey;
-  text-shadow: 1px 1px 2px;
+/*  text-shadow: 1px 1px 2px;*/
 }
 
 .black {
   
-  text-shadow: 1px 1px 2px;
+/*  text-shadow: 1px 1px 2px;*/
 }
 
 .rank {
