@@ -19,19 +19,44 @@ $(document).ready(function() {
 
 
 	$('#appendMe').on('click', function() {
+		
+		//Look at current from and to move, then find the change in squares
+		var current_move = $('#currentMove').val().split("-");
+		var rank_change = find_change_in_rank(current_move);
+		var file_change = find_change_in_file(current_move);
+		
+		move_rank(current_move[0] , rank_change);
+		move_file(current_move[0] , file_change);
 
-		// moveUpDown("blackKnight1", 2)
-		// moveRightLeft("blackKnight1", 1)
-		moveDiagonal("blackBishop1", -3, -1)
+		//debugging
+		highlightSquare($('#currentMove').val().split("-")[0])
+		highlightSquare($('#currentMove').val().split("-")[1])
+
 	});
+	$('#showCoordinates').on('click', function() {
+		
+		$('.coordinate').toggleClass("hideMe");
+		// $('#board').css( {"height": "600px", "width": "600px"}, 1000 );
 
+	});
 });
 
+//Passing in start and end square, now to determine movement number of squares
+function find_change_in_rank(start_end_array){
+	//subtract rank numbers gives the up/down value
+	return start_end_array[1].charAt(1) - start_end_array[0].charAt(1);
+}
+function find_change_in_file(start_end_array){
+	//convert file from alpha to number and find right/left value
+	return (start_end_array[1].charAt(0).charCodeAt()-96) - (start_end_array[0].charAt(0).charCodeAt()-96);
+
+}
+
 //Basic Movement: Up or Down the board
-function moveUpDown(pieceName, distanceInSquares){
-	
+function move_rank(squareName, distanceInSquares){
+console.log("Rank: "+distanceInSquares)	
 	//get DOM element to be moved
-	var pieceBeingMoved = $("#"+pieceName);
+	var pieceBeingMoved = $("#"+squareName).children();
 	//find its current Up-Down position on the board (needed due to
 	//position absolute)
 	var oldSpot = pieceBeingMoved.position().top;
@@ -40,16 +65,16 @@ function moveUpDown(pieceName, distanceInSquares){
 	$(pieceBeingMoved).css("top", oldSpot +"px")
 	//set what the new spot will be from the old (it is in squares and each square
 	//is 75px, so multiply them out)
-    var newSpot = oldSpot+(distanceInSquares*75);
+    var newSpot = oldSpot-(distanceInSquares*75);
     //animate the movement
   	$(pieceBeingMoved).animate( {"top": newSpot +"px"}, 1000 );	
 }
 
 //Basic Movement: Right or left on the board
-function moveRightLeft(pieceName, distanceInSquares){
-	
+function move_file(squareName, distanceInSquares){
+console.log("File: "+distanceInSquares)
 	//get DOM element to be moved
-	var pieceBeingMoved = $("#"+pieceName);
+	var pieceBeingMoved = $("#"+squareName).children();
 	//find its current Right-Left position on the board (needed due to
 	//position absolute)
 	var oldSpot = pieceBeingMoved.position().left;
@@ -60,7 +85,11 @@ function moveRightLeft(pieceName, distanceInSquares){
 	//is 75px, so multiply them out)
     var newSpot = oldSpot+(distanceInSquares*75);
     //animate the movement
-  	$(pieceBeingMoved).animate( {"left": newSpot +"px"}, 1000 );	
+  	$(pieceBeingMoved).animate( {"left": newSpot +"px"}, 1000); 
+  	// , function() {
+   //  	// Animation complete append piece
+   //  	appendToSquare(pieceName, "a5");
+  	// });
 }
 
 //Basic Movement: Diagonal on the board
@@ -84,6 +113,19 @@ function moveDiagonal(pieceName, distanceInSquares, inverse){
 		"left": oldSpotLeft+(distanceInSquares*75*inverse) +"px", 
   	}, 1000 );	
 }
+
+//Used to remove the piece from the oringinal square 
+//and append a piece from one square to another
+function appendToSquare(pieceName, squareName){
+	var pieceBeingMoved = $("#"+pieceName);
+	var squareMovedTo = $("#"+squareName);
+
+	console.log($(pieceBeingMoved))
+
+	$(squareMovedTo).append($(pieceBeingMoved))
+	$(pieceBeingMoved).css("top", "")
+	$(pieceBeingMoved).css("left", "")
+}  
 
 function highlightSquare(boardSquare){ $('#'+boardSquare).addClass("highlight") }
 
