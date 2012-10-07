@@ -19,9 +19,9 @@ Coordinates: <button id="showCoordinates">Coordinates</button>
 	    	<% if number == 9 %>
    	 			<div class="dark coordinate top" id="<%= file %><%= number %>"><%= file.capitalize %></div>
  	 		<% elsif (number + i).even? %>
- 	 			<div class="dark square" id="<%= file %><%= number %>"></div>
- 	 		<% else %>
  	 			<div class="square" id="<%= file %><%= number %>"></div>
+ 	 		<% else %>
+ 	 			<div class="dark square" id="<%= file %><%= number %>"></div>
  	 		<% end %>
 
 

@@ -11,50 +11,83 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
+//= require jquery-ui
 //= require jquery_ujs
 //= require_tree .
 
 $(document).ready(function() {
 	loadPiecesOnBoard()
-
+	
+	var moves = ["e2-e4","e7-e5","d1-Qh5","b8-Nc6","f1-Bd3","g8-Nf6","h5-Qxf7"] //"e2-e4","e7-e5","d1-Qh5","b8-Nc6",
 
 	$('#appendMe').on('click', function() {
+		if (moves.length !=0) {
+			one_move(moves[0]);
+			moves.shift();
+		}
 		
-		//Look at current from and to move, then find the change in squares
-		var current_move = $('#currentMove').val().split("-");
-		var rank_change = find_change_in_rank(current_move);
-		var file_change = find_change_in_file(current_move);
-		
-		move_rank(current_move[0] , rank_change);
-		move_file(current_move[0] , file_change);
-
-		//debugging
-		highlightSquare($('#currentMove').val().split("-")[0])
-		highlightSquare($('#currentMove').val().split("-")[1])
+		// var ilen = moves.length
+		// for (var i=0; i<ilen; ++i) {
+		// 	one_move(moves[i]);
+		// }
 
 	});
+
 	$('#showCoordinates').on('click', function() {
 		
 		$('.coordinate').toggleClass("hideMe");
 		// $('#board').css( {"height": "600px", "width": "600px"}, 1000 );
 
 	});
+
 });
+
+function one_move(move){
+	//Look at current from and to move, then find the change in squares
+	var current_move = move.split("-");
+
+	//remove anything but the last two letters from the moves
+	current_move[0] = current_move[0].substr(-2);
+	current_move[1] = current_move[1].substr(-2);
+
+	var rank_change = find_change_in_rank(current_move);
+	var file_change = find_change_in_file(current_move);
+	
+	console.log("Rank: "+rank_change)	
+	console.log("File: "+file_change)	
+	
+	//need to determine if its a knight move or a bishop/queen/king
+	if ((rank_change != 0) && (file_change != 0) && (move.search("N") === -1))
+	{
+		move_diagonal(current_move[0], current_move[1], rank_change, file_change)
+	}
+	else
+	{
+		move_rank(current_move[0] , rank_change);
+		move_file(current_move[0] , current_move[1], file_change );
+	}
+
+
+	//debugging
+	highlightSquare(current_move[0]);
+	highlightSquare(current_move[1]);
+}
 
 //Passing in start and end square, now to determine movement number of squares
 function find_change_in_rank(start_end_array){
 	//subtract rank numbers gives the up/down value
+
 	return start_end_array[1].charAt(1) - start_end_array[0].charAt(1);
 }
 function find_change_in_file(start_end_array){
 	//convert file from alpha to number and find right/left value
+
 	return (start_end_array[1].charAt(0).charCodeAt()-96) - (start_end_array[0].charAt(0).charCodeAt()-96);
 
 }
 
 //Basic Movement: Up or Down the board
 function move_rank(squareName, distanceInSquares){
-console.log("Rank: "+distanceInSquares)	
 	//get DOM element to be moved
 	var pieceBeingMoved = $("#"+squareName).children();
 	//find its current Up-Down position on the board (needed due to
@@ -67,14 +100,14 @@ console.log("Rank: "+distanceInSquares)
 	//is 75px, so multiply them out)
     var newSpot = oldSpot-(distanceInSquares*75);
     //animate the movement
-  	$(pieceBeingMoved).animate( {"top": newSpot +"px"}, 1000 );	
+  	$(pieceBeingMoved).animate( {"top": newSpot +"px"}, 500 );	
 }
 
 //Basic Movement: Right or left on the board
-function move_file(squareName, distanceInSquares){
-console.log("File: "+distanceInSquares)
+function move_file(old_square, new_square, distanceInSquares){
+
 	//get DOM element to be moved
-	var pieceBeingMoved = $("#"+squareName).children();
+	var pieceBeingMoved = $("#"+old_square).children();
 	//find its current Right-Left position on the board (needed due to
 	//position absolute)
 	var oldSpot = pieceBeingMoved.position().left;
@@ -85,17 +118,16 @@ console.log("File: "+distanceInSquares)
 	//is 75px, so multiply them out)
     var newSpot = oldSpot+(distanceInSquares*75);
     //animate the movement
-  	$(pieceBeingMoved).animate( {"left": newSpot +"px"}, 1000); 
-  	// , function() {
-   //  	// Animation complete append piece
-   //  	appendToSquare(pieceName, "a5");
-  	// });
+  	$(pieceBeingMoved).animate( {"left": newSpot +"px"}, 500, function() {
+    	// Animation complete append piece
+		append_to_square(old_square, new_square);
+  	 });
 }
 
 //Basic Movement: Diagonal on the board
-function moveDiagonal(pieceName, distanceInSquares, inverse){
+function move_diagonal(old_square, new_square, rank_change, file_change){
 	//get DOM element to be moved
-	var pieceBeingMoved = $("#"+pieceName);
+	var pieceBeingMoved = $("#"+old_square).children();
 	//find its current position on the board (needed due to
 	//position absolute)
 	var oldSpotTop = pieceBeingMoved.position().top;
@@ -109,25 +141,33 @@ function moveDiagonal(pieceName, distanceInSquares, inverse){
     
     //animate the movement
   	$(pieceBeingMoved).animate({
-  		"top": oldSpotTop+(distanceInSquares*75) +"px", 
-		"left": oldSpotLeft+(distanceInSquares*75*inverse) +"px", 
-  	}, 1000 );	
+  		"top": oldSpotTop-(rank_change*75) +"px", 
+		"left": oldSpotLeft+(file_change*75) +"px", 
+  		}, 500 , function() {
+    		// Animation complete append piece
+			append_to_square(old_square, new_square);
+  	 });
 }
 
 //Used to remove the piece from the oringinal square 
 //and append a piece from one square to another
-function appendToSquare(pieceName, squareName){
-	var pieceBeingMoved = $("#"+pieceName);
-	var squareMovedTo = $("#"+squareName);
+function append_to_square(old_square, new_square){
+	var pieceBeingMoved = $("#"+old_square).children();
+	new_square = $("#"+new_square);
 
-	console.log($(pieceBeingMoved))
+console.log(new_square.children())
+	if (new_square.children().length > 0){
+		new_square.effect("highlight", {"color" : "red"}, 3000)
+		new_square.children().remove();
+		console.log("here")
+	}
 
-	$(squareMovedTo).append($(pieceBeingMoved))
-	$(pieceBeingMoved).css("top", "")
-	$(pieceBeingMoved).css("left", "")
+	new_square.append(pieceBeingMoved)
+	pieceBeingMoved.css("top", "")
+	pieceBeingMoved.css("left", "")
 }  
 
-function highlightSquare(boardSquare){ $('#'+boardSquare).addClass("highlight") }
+function highlightSquare(boardSquare){ $('#'+boardSquare).effect("highlight", {"color" : "yellow"}, 1000) }
 
 function loadPiecesOnBoard(){
 	
@@ -135,8 +175,8 @@ function loadPiecesOnBoard(){
 	$('#a1').append("<div id='whiteRook1' class='piece white'>&#9820</div>")
 	$('#b1').append("<div id='whiteKnight1' class='piece white'>&#9822</div>")
 	$('#c1').append("<div id='whiteBishop1' class='piece white'>&#9821</div>")
-	$('#d1').append("<div id='whiteQueen' class='piece white'>&#9818</div>")
-	$('#e1').append("<div id='whiteKing' class='piece white'>&#9819</div>")
+	$('#d1').append("<div id='whiteQueen' class='piece white'>&#9819</div>")
+	$('#e1').append("<div id='whiteKing' class='piece white'>&#9818</div>")
 	$('#f1').append("<div id='whiteBishop2' class='piece white'>&#9821</div>")
 	$('#g1').append("<div id='whiteKnight2' class='piece white'>&#9822</div>")
 	$('#h1').append("<div id='whiteRook2' class='piece white'>&#9820</div>")
@@ -155,8 +195,8 @@ function loadPiecesOnBoard(){
 	$('#a8').append("<div id='blackRook1' class='piece black'>&#9820</div>")
 	$('#b8').append("<div id='blackKnight1' class='piece black'>&#9822</div>")
 	$('#c8').append("<div id='blackBishop1' class='piece black'>&#9821</div>")
-	$('#d8').append("<div id='blackQueen' class='piece black'>&#9818</div>")
-	$('#e8').append("<div id='blackKing' class='piece black'>&#9819</div>")
+	$('#d8').append("<div id='blackQueen' class='piece black'>&#9819</div>")
+	$('#e8').append("<div id='blackKing' class='piece black'>&#9818</div>")
 	$('#f8').append("<div id='blackBishop2' class='piece black'>&#9821</div>")
 	$('#g8').append("<div id='blackKnight2' class='piece black'>&#9822</div>")
 	$('#h8').append("<div id='blackRook2' class='piece black'>&#9820</div>")
