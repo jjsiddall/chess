@@ -17,10 +17,12 @@
 
 $(document).ready(function() {
 	loadPiecesOnBoard()
-	
-	var moves = ["e2-e4","e7-e5","d1-Qh5","b8-Nc6","f1-Bd3","g8-Nf6","h5-Qxf7"] //"e2-e4","e7-e5","d1-Qh5","b8-Nc6",
+	var moves = $("#board").data('moves').split(",")
 
-	$('#appendMe').on('click', function() {
+	$('#move').on('click', function() {
+
+		console.log($("#board").data('moves'))
+
 		if (moves.length !=0) {
 			one_move(moves[0]);
 			moves.shift();
