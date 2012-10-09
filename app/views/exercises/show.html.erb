@@ -4,8 +4,10 @@
   <b>Title:</b>
   <%= @exercise.title %>
 </p>
-<!-- 
-<p>
+<%= link_to 'Edit', edit_exercise_path(@exercise) %> |
+<%= link_to 'Back', exercises_path %>
+<br>
+<!-- <p>
   <b>Description:</b>
   <%= @exercise.description %>
 </p>
@@ -13,13 +15,13 @@
 <p>
   <b>Moves:</b>
   <%= @exercise.moves %>
-</p> -->
-
+</p>
+ -->
 <button id="move">Next Move</button>
 <br>
 <button id="showCoordinates">Coordinates</button>
 
-<div id="board" data-moves="<%= @exercise.moves %>">
+<div id="board" data-initial_setup="<%=@exercise.initial_setup %>" data-moves="<%= @exercise.moves %>">
   <% 9.downto(1) do |number| %>
    
 	<div class="rank">
@@ -45,5 +47,4 @@
   <% end %>
 </div>
 
-<%= link_to 'Edit', edit_exercise_path(@exercise) %> |
-<%= link_to 'Back', exercises_path %>
+

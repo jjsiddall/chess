@@ -4,6 +4,6 @@ Chess::Application.routes.draw do
 
   resources :games
 
-  root :to => 'games#index'
+  root :to => 'exercises#index'
 
 end

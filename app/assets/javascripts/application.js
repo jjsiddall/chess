@@ -16,7 +16,7 @@
 //= require_tree .
 
 $(document).ready(function() {
-	loadPiecesOnBoard()
+	loadPiecesOnBoard($("#board").data('initial_setup').split(","))
 	var moves = $("#board").data('moves').split(",")
 
 	$('#move').on('click', function() {
@@ -30,7 +30,7 @@ $(document).ready(function() {
 		
 		// var ilen = moves.length
 		// for (var i=0; i<ilen; ++i) {
-		// 	one_move(moves[i]);
+		// 	stuff
 		// }
 
 	});
@@ -171,46 +171,21 @@ console.log(new_square.children())
 
 function highlightSquare(boardSquare){ $('#'+boardSquare).effect("highlight", {"color" : "yellow"}, 1000) }
 
-function loadPiecesOnBoard(){
+function loadPiecesOnBoard(initial_setup){
 	
-	//Load white pieces
-	$('#a1').append("<div id='whiteRook1' class='piece white'>&#9820</div>")
-	$('#b1').append("<div id='whiteKnight1' class='piece white'>&#9822</div>")
-	$('#c1').append("<div id='whiteBishop1' class='piece white'>&#9821</div>")
-	$('#d1').append("<div id='whiteQueen' class='piece white'>&#9819</div>")
-	$('#e1').append("<div id='whiteKing' class='piece white'>&#9818</div>")
-	$('#f1').append("<div id='whiteBishop2' class='piece white'>&#9821</div>")
-	$('#g1').append("<div id='whiteKnight2' class='piece white'>&#9822</div>")
-	$('#h1').append("<div id='whiteRook2' class='piece white'>&#9820</div>")
-	//pawns
-	$('#a2').append("<div id='whitePawn1' class='piece white'>&#9823</div>")
-	$('#b2').append("<div id='whitePawn2' class='piece white'>&#9823</div>")
-	$('#c2').append("<div id='whitePawn3' class='piece white'>&#9823</div>")
-	$('#d2').append("<div id='whitePawn4' class='piece white'>&#9823</div>")
-	$('#e2').append("<div id='whitePawn5' class='piece white'>&#9823</div>")
-	$('#f2').append("<div id='whitePawn6' class='piece white'>&#9823</div>")
-	$('#g2').append("<div id='whitePawn7' class='piece white'>&#9823</div>")
-	$('#h2').append("<div id='whitePawn8' class='piece white'>&#9823</div>")	
+	var piece_name = ["King", "Queen", "Rook", "Bishop", "Knight", "Pawn"]
+	var piece_ascii = ["&#9818", "&#9819", "&#9820", "&#9821", "&#9822", "&#9823"]
 
+	var ilen = initial_setup.length
+	for (var i=0; i<ilen; ++i) {
 
-	//Load black pieces
-	$('#a8').append("<div id='blackRook1' class='piece black'>&#9820</div>")
-	$('#b8').append("<div id='blackKnight1' class='piece black'>&#9822</div>")
-	$('#c8').append("<div id='blackBishop1' class='piece black'>&#9821</div>")
-	$('#d8').append("<div id='blackQueen' class='piece black'>&#9819</div>")
-	$('#e8').append("<div id='blackKing' class='piece black'>&#9818</div>")
-	$('#f8').append("<div id='blackBishop2' class='piece black'>&#9821</div>")
-	$('#g8').append("<div id='blackKnight2' class='piece black'>&#9822</div>")
-	$('#h8').append("<div id='blackRook2' class='piece black'>&#9820</div>")
-	//pawns
-	$('#a7').append("<div id='blackPawn1' class='piece black'>&#9823</div>")
-	$('#b7').append("<div id='blackPawn2' class='piece black'>&#9823</div>")
-	$('#c7').append("<div id='blackPawn3' class='piece black'>&#9823</div>")
-	$('#d7').append("<div id='blackPawn4' class='piece black'>&#9823</div>")
-	$('#e7').append("<div id='blackPawn5' class='piece black'>&#9823</div>")
-	$('#f7').append("<div id='blackPawn6' class='piece black'>&#9823</div>")
-	$('#g7').append("<div id='blackPawn7' class='piece black'>&#9823</div>")
-	$('#h7').append("<div id='blackPawn8' class='piece black'>&#9823</div>")	
+		var square_info = initial_setup[i].split("-");
+
+		var which_ascii = $.inArray(square_info[2], piece_name)
+
+		$('#'+square_info[0]).append("<div class='piece "+square_info[1]+"'>"+piece_ascii[which_ascii]+"</div>")	
+	}
+ 
 }
 
 
