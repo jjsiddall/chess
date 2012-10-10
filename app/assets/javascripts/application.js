@@ -16,6 +16,22 @@
 //= require_tree .
 
 $(document).ready(function() {
+	
+	//This is the slider (need to clean this up a lot)
+        var select = $( "#board_size" );
+        $( "#slider" ).slider({
+            min: 1,
+            max: 10,
+            range: "min",
+            value: select[ 0 ].selectedIndex + 1,
+            slide: function( event, ui ) {
+                select[ 0 ].selectedIndex = ui.value - 1;
+                sizer(ui.value/5);
+            }
+        });
+
+
+
 	loadPiecesOnBoard($("#board").data('initial_setup').split(","))
 	var moves = $("#board").data('moves').split(",")
 
@@ -97,10 +113,12 @@ function move_rank(squareName, distanceInSquares){
 	var oldSpot = pieceBeingMoved.position().top;
 	//set current Up-Down position so it does not fly to the top of the board (due to 
 	//it starting at 0)
-	$(pieceBeingMoved).css("top", oldSpot +"px")
+	$(pieceBeingMoved).css("top", oldSpot +"px");
 	//set what the new spot will be from the old (it is in squares and each square
-	//is 75px, so multiply them out)
-    var newSpot = oldSpot-(distanceInSquares*75);
+	//is variable, so get the value and then multiply them out)
+    var square_size = parseInt($('.square').css("height"));
+
+    var newSpot = oldSpot-(distanceInSquares*square_size);
     //animate the movement
   	$(pieceBeingMoved).animate( {"top": newSpot +"px"}, 500 );	
 }
@@ -115,10 +133,12 @@ function move_file(old_square, new_square, distanceInSquares){
 	var oldSpot = pieceBeingMoved.position().left;
 	//set current Rigth-Left position so it does not fly to the top of the board (due to 
 	//it starting at 0)
-	$(pieceBeingMoved).css("left", oldSpot +"px")
+	$(pieceBeingMoved).css("left", oldSpot +"px");
 	//set what the new spot will be from the old (it is in squares and each square
-	//is 75px, so multiply them out)
-    var newSpot = oldSpot+(distanceInSquares*75);
+	//is variable, so get the value and then multiply them out)
+    var square_size = parseInt($('.square').css("height"));
+
+    var newSpot = oldSpot+(distanceInSquares * square_size);
     //animate the movement
   	$(pieceBeingMoved).animate( {"left": newSpot +"px"}, 500, function() {
     	// Animation complete append piece
@@ -136,15 +156,16 @@ function move_diagonal(old_square, new_square, rank_change, file_change){
 	var oldSpotLeft = pieceBeingMoved.position().left;
 	//set current position so it does not fly to the top of the board (due to 
 	//it starting at 0)
-	$(pieceBeingMoved).css("top", oldSpotTop +"px")
-	$(pieceBeingMoved).css("left", oldSpotLeft +"px")
+	$(pieceBeingMoved).css("top", oldSpotTop +"px");
+	$(pieceBeingMoved).css("left", oldSpotLeft +"px");
 	//set what the new spot will be from the old (it is in squares and each square
-	//is 75px, so multiply them out)
-    
+	//is variable, so get the value and then multiply them out)
+    var square_size = parseInt($('.square').css("height"));
+
     //animate the movement
   	$(pieceBeingMoved).animate({
-  		"top": oldSpotTop-(rank_change*75) +"px", 
-		"left": oldSpotLeft+(file_change*75) +"px", 
+  		"top": oldSpotTop-(rank_change * square_size) +"px", 
+		"left": oldSpotLeft+(file_change * square_size) +"px", 
   		}, 500 , function() {
     		// Animation complete append piece
 			append_to_square(old_square, new_square);
@@ -188,4 +209,20 @@ function loadPiecesOnBoard(initial_setup){
  
 }
 
+function sizer(percent_of_original){
+	var css_attr_to_shrink = ["#board", ".square", ".corner", ".side", ".top"]
 
+	var ilen = css_attr_to_shrink.length
+	for (var i=0; i<ilen; ++i) {
+		$(css_attr_to_shrink[i]).css("height", parseInt($(css_attr_to_shrink[i]).css("height"))*percent_of_original)
+			.css("width", parseInt($(css_attr_to_shrink[i]).css("width"))*percent_of_original)
+	}
+
+	var css_attr_to_shrink = [".piece", ".side", ".top"]
+	var ilen = css_attr_to_shrink.length
+	for (var i=0; i<ilen; ++i) {
+		$(css_attr_to_shrink[i]).css("font-size", parseInt($(css_attr_to_shrink[i]).css("font-size"))*percent_of_original)
+			.css("padding-left", parseInt($(css_attr_to_shrink[i]).css("padding-left"))*percent_of_original)
+	}
+
+}
