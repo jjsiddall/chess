@@ -188,18 +188,11 @@ $(document).ready(function() {
 // function highlightSquare(boardSquare){ $('#'+boardSquare).effect("highlight", {"color" : "yellow"}, 1000) }
 
 function loadPiecesOnBoard(initial_setup){
-	
-	var piece_name = ["King", "Queen", "Rook", "Bishop", "Knight", "Pawn"]
-	var piece_ascii = ["&#9818", "&#9819", "&#9820", "&#9821", "&#9822", "&#9823"]
 
 	var ilen = initial_setup.length
 	for (var i=0; i<ilen; ++i) {
-
 		var square_info = initial_setup[i].split("-");
-
-		var which_ascii = $.inArray(square_info[2], piece_name)
-
-		$('#'+square_info[0]).append("<div class='piece "+square_info[1]+"'>"+piece_ascii[which_ascii]+"</div>")	
+		$('#'+square_info[0]).append("<div class='piece "+square_info[1]+"'>"+square_info[2]+"</div>");
 	}
  
 }
