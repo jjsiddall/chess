@@ -157,7 +157,6 @@ console.log(new_square.children())
 	if (new_square.children().length > 0){
 		new_square.effect("highlight", {"color" : "red"}, 500)
 		new_square.children().remove();
-		console.log("here")
 	}
 
 	new_square.append(pieceBeingMoved)
