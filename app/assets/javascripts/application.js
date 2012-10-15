@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery-ui
 //= require jquery_ujs
+//= require twitter/bootstrap
 
 
 $(document).ready(function() {
@@ -20,6 +21,7 @@ $(document).ready(function() {
 });
 
 function loadPiecesOnBoard(initial_setup){
+	console.log(initial_setup);
 
 	var ilen = initial_setup.length
 	for (var i=0; i<ilen; ++i) {
@@ -29,15 +31,15 @@ function loadPiecesOnBoard(initial_setup){
  
 }
 
-function sizer(percent_of_original){
-	var css_attr_to_shrink = ["#board", ".square", ".corner", ".side", ".top"]
-
+function sizeBoard(percent_of_original){
+	var css_attr_to_shrink = ["#board", ".square", ".unused-square", ".corner", ".side", ".top"]
 	var ilen = css_attr_to_shrink.length
 	for (var i=0; i<ilen; ++i) {
 		$(css_attr_to_shrink[i]).css("height", parseInt($(css_attr_to_shrink[i]).css("height"))*percent_of_original)
 			.css("width", parseInt($(css_attr_to_shrink[i]).css("width"))*percent_of_original)
 	}
-
+}
+function sizeFont(percent_of_original){
 	var css_attr_to_shrink = [".piece", ".side", ".top"]
 	var ilen = css_attr_to_shrink.length
 	for (var i=0; i<ilen; ++i) {

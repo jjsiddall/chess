@@ -1,8 +1,8 @@
 $(document).ready(function() {
 	
 	//Sizing the board to the "show" size
-	sizer(.8);
-
+	sizeBoard(.8);
+	sizeFont(.8);
 //	This is the slider (need to clean this up a lot)
         var select = $( "#board_size" );
         $( "#slider" ).slider({

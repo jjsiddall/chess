@@ -1,46 +1,46 @@
 $(document).ready(function() {
 	
 	//Sizing the board to the "show" size
-	sizer(.5);
-	//get which exercise I am working with (the id of it) so I can use it later on teh ajax call
-	var exercise_id = $("#board").data('id')
+	sizeBoard(.5);
+	sizeFont(.5);
 
-	$('.piece').addClass('draggable');
+	$('#clear-board').on('click', function() {
+		clearBoard();
+	});
+
+	$('#reset-board').on('click', function() {
+		resetBoard();
+	});
+
   	//used for trophy set up - drag 'em around and drop'em where ever
   	makeDraggable();
 
   	$('.square').droppable({
     	drop: function(event, ui) {
-		    // $(this).html($(ui.draggable).css('left'));
-		    // .html('');
-		    // $(".last_move").removeClass('last_move');
-		    // $(this).addClass('last_move');
-
-		    // $(ui.draggable).attr('data-trophyid')
+    		//cashe the item that is being dragged
 			pieceBeingMoved = $(ui.draggable);
+
+			//remove any children on the spot being dropped on
 			$(this).children().remove();
-			$( this ).append(pieceBeingMoved);
+			//add the dragged piece to the board
+			$(this).append(pieceBeingMoved);
 			pieceBeingMoved.css("top", "");
 			pieceBeingMoved.css("left", "");
 
-			var initial_setup = getCurrentLayout();
-
+			//reset the extra piece set
 			resetExtraPiece($(ui.draggable));
 
-		    $.ajax({
-	        	url: '/exercises/' + exercise_id,
-	        	type: 'PUT',
-	        	data: {
-	            	'exercise[id]': exercise_id,
-	            	'exercise[initial_setup]': initial_setup
-	    		},
-	    		dataType: 'json'
-	  		});
+			//remove the piece being dragged if it is moved to any of the "deleteme" squares
+			if ($(this).attr('class').indexOf('deleteme') != -1){
+				pieceBeingMoved.remove();
+			}
+			saveCurrentBoard();
     	}
   	});
 });
 
 function makeDraggable(){
+	$('.piece').addClass('draggable');
 	$( ".draggable" ).draggable({ containment: "#setup_board" });
 }
 
@@ -71,4 +71,34 @@ function resetExtraPiece(piece){
 	//clone what we moved and place it back into the extra pieces spot
 	piece.clone().removeClass('ui-draggable-dragging').appendTo(reset_point);
 	makeDraggable();
+}
+
+function resetBoard(){
+	beginningSetup = "a8-black-♜,b8-black-♞,c8-black-♝,d8-black-♛,e8-black-♚,f8-black-♝,g8-black-♞,h8-black-♜,a7-black-♟,b7-black-♟,c7-black-♟,d7-black-♟,e7-black-♟,f7-black-♟,g7-black-♟,h7-black-♟,a2-white-♟,b2-white-♟,c2-white-♟,d2-white-♟,e2-white-♟,f2-white-♟,g2-white-♟,h2-white-♟,a1-white-♜,b1-white-♞,c1-white-♝,d1-white-♛,e1-white-♚,f1-white-♝,g1-white-♞,h1-white-♜"
+	loadPiecesOnBoard(beginningSetup.split(","));
+	sizeFont(.5);
+	makeDraggable();
+	saveCurrentBoard();
+}
+function clearBoard(){
+	$(".square").each(function(e) {
+		$(this).children().remove();
+	});
+	saveCurrentBoard();
+}
+
+function saveCurrentBoard(){
+	//get which exercise I am working with (the id of it) so I can use it later on teh ajax call
+	exercise_id = $("#board").data('id')
+	//get what the board currently looks like and PUT it in the DB
+	var initial_setup = getCurrentLayout();
+    $.ajax({
+    	url: '/exercises/' + exercise_id,
+    	type: 'PUT',
+    	data: {
+        	'exercise[id]': exercise_id,
+        	'exercise[initial_setup]': initial_setup
+		},
+		dataType: 'json'
+	});
 }
