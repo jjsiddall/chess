@@ -14,6 +14,10 @@
 //= require jquery-ui
 //= require jquery_ujs
 //= require twitter/bootstrap
+//= require application
+//= require move
+//= require setup
+//= require_tree .
 
 
 $(document).ready(function() {
@@ -21,7 +25,6 @@ $(document).ready(function() {
 });
 
 function loadPiecesOnBoard(initial_setup){
-	console.log(initial_setup);
 
 	var ilen = initial_setup.length
 	for (var i=0; i<ilen; ++i) {

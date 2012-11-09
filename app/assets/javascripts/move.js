@@ -1,22 +1,5 @@
 $(document).ready(function() {
 	
-	//Sizing the board to the "show" size
-	sizeBoard(.8);
-	sizeFont(.8);
-//	This is the slider (need to clean this up a lot)
-        var select = $( "#board_size" );
-        $( "#slider" ).slider({
-            min: 1,
-            max: 10,
-            range: "min",
-            value: select[ 0 ].selectedIndex + 1,
-            slide: function( event, ui ) {
-                select[ 0 ].selectedIndex = ui.value - 1;
-                sizer(ui.value/5);
-            }
-        });
-	
-
 	var moves = $("#board").data('moves').split(",")
 
 	$('#move').on('click', function() {
@@ -29,9 +12,6 @@ $(document).ready(function() {
 	});
 
 	$('#showCoordinates').on('click', function() { $('.coordinate').toggleClass("hideMe");});
-
-	//set up board in the middle for "move js"
-	$('#board').css('margin', 'auto');
 
 });
 
