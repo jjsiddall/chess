@@ -33,9 +33,22 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# Added by @jjsiddall
+gem 'figaro' #https://github.com/laserlemon/figaro
+gem 'jquery-rails' #https://github.com/seyhunak/twitter-bootstrap-rails
+gem 'simple_form' #https://github.com/plataformatec/simple_form
+gem 'twitter-bootstrap-rails' #https://github.com/seyhunak/twitter-bootstrap-rails
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+
+  #added by @jjsiddall
+  gem 'factory_bot_rails' #https://github.com/thoughtbot/factory_bot_rails
+  gem 'guard-rspec', require: false #https://github.com/ranmocy/guard-rails
+  gem 'rspec-rails' #https://github.com/rspec/rspec-rails
+  gem 'shoulda-matchers' #https://github.com/thoughtbot/shoulda-matchers
+
 end
 
 group :development do
