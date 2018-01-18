@@ -68,3 +68,8 @@ guard :rspec, cmd: "bundle exec rspec" do
     Dir[File.join("**/#{m[1]}.feature")][0] || "spec/acceptance"
   end
 end
+
+guard :rails, port: 3000, host: '0.0.0.0' do
+  watch('Gemfile.lock')
+  watch(%r{^(config|lib)/.*})
+end
