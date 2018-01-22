@@ -69,7 +69,7 @@ guard :rspec, cmd: "bundle exec rspec" do
   end
 end
 
-guard :rails, port: 3000, host: '0.0.0.0' do
-  watch('Gemfile.lock')
-  watch(%r{^(config|lib)/.*})
-end
+# guard :rails, port: 3000, host: '0.0.0.0' do
+#   watch('Gemfile.lock')
+#   watch(%r{^(config|lib)/.*})
+# end
