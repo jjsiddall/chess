@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Piece:</strong>
+  <%= @move.piece %>
+</p>
+
+<p>
+  <strong>Square:</strong>
+  <%= @move.square %>
+</p>
+
+<p>
+  <strong>Summary:</strong>
+  <%= @move.summary %>
+</p>
+
+<p>
+  <strong>Exercise:</strong>
+  <%= @move.exercise %>
+</p>
+
+<%= link_to 'Edit', edit_move_path(@move) %> |
+<%= link_to 'Back', moves_path %>

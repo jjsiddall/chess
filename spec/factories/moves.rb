@@ -1,10 +1,12 @@
 FactoryBot.define do
-  factory :lesson do
-    title "MyString"
-    summary "MyText"
+  factory :move do
+    piece "wp1"
+    square "e4"
+    summary "summary-text"
+    exercise
 
     trait :invalid do
-      title nil
+      piece nil
     end
     trait :new do
       summary "summary-text-new"

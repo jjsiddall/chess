@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :moves
   resources :exercises
   root to: 'lessons#index'
   resources :lessons

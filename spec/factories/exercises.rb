@@ -10,7 +10,7 @@ FactoryBot.define do
       title nil
     end
     trait :new do
-      summary "summary-new-text"
+      summary "summary-text-new"
     end
 
   end
