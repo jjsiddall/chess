@@ -29,11 +29,11 @@ RSpec.describe ExercisesController, type: :controller do
   # Exercise. As you add validations to Exercise, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    build(:exercise).attributes.symbolize_keys
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    build(:exercise, :invalid).attributes.symbolize_keys
   }
 
   # This should return the minimal set of values that should be in the session
@@ -97,14 +97,14 @@ RSpec.describe ExercisesController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        build(:exercise, :new).attributes.symbolize_keys
       }
 
       it "updates the requested exercise" do
         exercise = Exercise.create! valid_attributes
         put :update, params: {id: exercise.to_param, exercise: new_attributes}, session: valid_session
         exercise.reload
-        skip("Add assertions for updated state")
+        expect(exercise.summary).to eq(new_attributes[:summary])
       end
 
       it "redirects to the exercise" do

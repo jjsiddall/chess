@@ -1,9 +1,17 @@
 FactoryBot.define do
   factory :exercise do
-    title "MyString"
-    summary "MyText"
-    lesson nil
+    title "title-string"
+    summary "summary-text"
+    lesson
     setup ""
-    conclusion "MyText"
+    conclusion "conclusion-text"
+
+    trait :invalid do
+      title nil
+    end
+    trait :new do
+      summary "summary-new-text"
+    end
+
   end
 end

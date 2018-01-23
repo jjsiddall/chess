@@ -2,13 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "exercises/edit", type: :view do
   before(:each) do
-    @exercise = assign(:exercise, Exercise.create!(
-      :title => "MyString",
-      :summary => "MyText",
-      :lesson => nil,
-      :setup => "",
-      :conclusion => "MyText"
-    ))
+    @exercise = assign(:exercise, create(:exercise))
   end
 
   it "renders the edit exercise form" do
@@ -20,9 +14,9 @@ RSpec.describe "exercises/edit", type: :view do
 
       assert_select "textarea[name=?]", "exercise[summary]"
 
-      assert_select "input[name=?]", "exercise[lesson_id]"
+      assert_select "select[name=?]", "exercise[lesson_id]"
 
-      assert_select "input[name=?]", "exercise[setup]"
+      assert_select "textarea[name=?]", "exercise[setup]"
 
       assert_select "textarea[name=?]", "exercise[conclusion]"
     end
