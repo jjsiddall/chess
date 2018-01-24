@@ -1,0 +1,35 @@
+<%# add navigation links to this file %>
+<% #if user_signed_in? && current_user.admin? %>
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" id="admin-drop" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+      Admin <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="admin-drop">
+      <li><%= link_to 'Lessons', lessons_path %></li>
+      <li><%= link_to 'Exercises', exercises_path %></li>
+      <li><%= link_to 'Moves', moves_path %></li>
+    </ul>
+  </li>
+<% #end %>
+
+<%# if user_signed_in? %>
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" id="user-drop" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+      <i class="fa fa-user fa-lg" aria-hidden="true"></i> <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="user-drop">
+      <li><%# link_to 'My Dashboard', user_root_path %></li>
+      <li><%# link_to 'My Account', edit_user_registration_path %></li>
+      <li role="separator" class="divider"></li>
+      <li><%# link_to 'My Leagues', leagues_path %></li>
+      <li><%# link_to 'My Invites', league_invites_path %></li>
+      <li><%# link_to 'My Teams', teams_path %></li>
+      <li><%# link_to 'My Picks', picks_path %></li>
+      <li role="separator" class="divider"></li>
+      <li><%# link_to 'Sign out', destroy_user_session_path, :method=>'delete' %></li>
+    </ul>
+  </li>
+<%# else %>
+  <li><%# link_to 'Sign in', new_user_session_path %></li>
+  <li><%# link_to 'Sign up', new_user_registration_path %></li>
+<%# end %>
