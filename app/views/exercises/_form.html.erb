@@ -1,15 +1,11 @@
-<%= simple_form_for(@exercise) do |f| %>
-  <%= f.error_notification %>
+<%= simple_form_for @exercise, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :title %>
+  <%= f.input :summary %>
+  <%= f.input :setup, as: :text %>
+  <%= f.input :conclusion %>
+  <%= f.association :lesson %>
 
-  <div class="form-inputs">
-    <%= f.input :title %>
-    <%= f.input :summary %>
-    <%= f.association :lesson %>
-    <%= f.input :setup, as: :text  %>
-    <%= f.input :conclusion %>
-  </div>
-
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
+  <%= f.button :submit, :class => 'btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                exercises_path, :class => 'btn btn-default' %>
 <% end %>

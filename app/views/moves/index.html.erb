@@ -1,33 +1,44 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Moves</h1>
-
-<table>
+<%- model_class = Move -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>Piece</th>
-      <th>Square</th>
-      <th>Summary</th>
-      <th>Exercise</th>
-      <th colspan="3"></th>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:piece) %></th>
+      <th><%= model_class.human_attribute_name(:square) %></th>
+      <th><%= model_class.human_attribute_name(:summary) %></th>
+      <th><%= model_class.human_attribute_name(:exercise_id) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
-
   <tbody>
     <% @moves.each do |move| %>
       <tr>
+        <td><%= link_to move.id, move_path(move) %></td>
         <td><%= move.piece %></td>
         <td><%= move.square %></td>
         <td><%= move.summary %></td>
-        <td><%= move.exercise %></td>
-        <td><%= link_to 'Show', move %></td>
-        <td><%= link_to 'Edit', edit_move_path(move) %></td>
-        <td><%= link_to 'Destroy', move, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= move.exercise_id %></td>
+        <td><%=l move.created_at %></td>
+        <td>
+          <%= link_to t('.show', :default => t("helpers.links.show")),
+                      move_path(move), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_move_path(move), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      move_path(move),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-xs btn-danger' %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Move', new_move_path %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_move_path,
+            :class => 'btn btn-primary' %>

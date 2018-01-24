@@ -22,3 +22,7 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+# Development
+* using `gem twitter-bootstrap-rails`
+  * rails g bootstrap:themed [RESOURCE_NAME]

@@ -1,14 +1,10 @@
-<%= simple_form_for(@move) do |f| %>
-  <%= f.error_notification %>
+<%= simple_form_for @move, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :piece %>
+  <%= f.input :square %>
+  <%= f.input :summary %>
+  <%= f.association :exercise %>
 
-  <div class="form-inputs">
-    <%= f.input :piece %>
-    <%= f.input :square %>
-    <%= f.input :summary %>
-    <%= f.association :exercise %>
-  </div>
-
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
+  <%= f.button :submit, :class => 'btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                moves_path, :class => 'btn btn-default' %>
 <% end %>
