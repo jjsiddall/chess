@@ -1,3 +1,24 @@
 // Place all the styles related to the exercises controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.board{
+  width: fit-content;
+  // display: table;
+}
+.for-board{
+  margin-left: 0px;
+  margin-right: 0px;
+}
+.square{
+  height: 25px;
+  width: 25px;
+  float: left;
+  text-align: center;
+  border: 1px solid gray;
+  // display: table-cell;
+  // vertical-align: middle;
+}
+.no-border{border:none;}
+.black{
+  background-color: gray;
+}

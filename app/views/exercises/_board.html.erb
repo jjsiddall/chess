@@ -1,0 +1,18 @@
+<div class="board">
+ <% 8.downto(1) do |rank| %>
+  <div class="row for-board">
+   <div class="square no-border"><%= rank %></div>
+   <% 1.upto(8) do |file| %>
+     <%= content_tag(:div, "", class: ["square", ((rank+file) % 2 == 0 ? 'black' : 'white')], id: (file+95).chr + rank.to_s) %>
+   <% end %>
+  </div>
+ <% end %>
+ <!-- bottom row START -->
+ <div class="row for-board">
+   <div class="square no-border"></div>
+   <% ('a'..'h').each do |file| %>
+    <div class="square no-border"><%= file %></div>
+   <% end %>
+ </div>
+ <!-- bottom row END -->
+</div>
