@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180123193042) do
+ActiveRecord::Schema.define(version: 20180128041337) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20180123193042) do
     t.string "title"
     t.text "summary"
     t.bigint "lesson_id"
-    t.json "setup"
+    t.jsonb "setup"
     t.text "conclusion"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

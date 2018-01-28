@@ -3,7 +3,7 @@
   <div class="row for-board">
    <div class="square no-border"><%= rank %></div>
    <% 1.upto(8) do |file| %>
-     <%= content_tag(:div, "", class: ["square", ((rank+file) % 2 == 0 ? 'black' : 'white')], id: (file+95).chr + rank.to_s) %>
+    <%= square(rank, file, setup) %>
    <% end %>
   </div>
  <% end %>

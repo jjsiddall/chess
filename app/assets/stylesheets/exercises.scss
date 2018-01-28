@@ -14,11 +14,13 @@
   width: 25px;
   float: left;
   text-align: center;
-  border: 1px solid gray;
+  border: 1px solid #555555;
   // display: table-cell;
   // vertical-align: middle;
 }
+.dark{ background-color: #555555; }
 .no-border{border:none;}
-.black{
-  background-color: gray;
-}
+
+.piece{ text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;}
+.black{ color: black; }
+.white{ color: gray; }
