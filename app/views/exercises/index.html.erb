@@ -9,7 +9,7 @@
       <th><%= model_class.human_attribute_name(:title) %></th>
       <th><%= model_class.human_attribute_name(:summary) %></th>
       <th><%= model_class.human_attribute_name(:lesson_id) %></th>
-      <th><%= model_class.human_attribute_name(:setup) %></th>
+      <!-- <th><%= model_class.human_attribute_name(:setup) %></th> -->
       <th><%= model_class.human_attribute_name(:conclusion) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
@@ -21,8 +21,8 @@
         <td><%= link_to exercise.id, exercise_path(exercise) %></td>
         <td><%= exercise.title %></td>
         <td><%= exercise.summary %></td>
-        <td><%= exercise.lesson_id %></td>
-        <td><%= exercise.setup %></td>
+        <td><%= exercise.lesson.title %></td>
+        <!-- <td><%= exercise.setup %></td> -->
         <td><%= exercise.conclusion %></td>
         <td><%=l exercise.created_at %></td>
         <td>
