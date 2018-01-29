@@ -2,28 +2,38 @@
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
 </div>
+<div class="row">
+  <div class="col-md-4">
+    <%= render 'board', setup: @exercise.setup %>
+  </div>
+  <div class="col-md-4">
+    <p>Moves</p>
+    <% @exercise.moves.each_with_index do |move, index| %>
+      <%= link_to "Move #{index}","#", class: "next-move", data: {piece: move.piece, square: move.square} %> <br>
+    <% end %>
+  </div>
+  <div class="col-md-4">
+    <dl class="dl-horizontal">
+      <dt><strong><%= model_class.human_attribute_name(:title) %>:</strong></dt>
+      <dd><%= @exercise.title %></dd>
+      <dt><strong><%= model_class.human_attribute_name(:summary) %>:</strong></dt>
+      <dd><%= @exercise.summary %></dd>
+      <dt><strong><%= model_class.human_attribute_name(:lesson_id) %>:</strong></dt>
+      <dd><%= @exercise.lesson_id %></dd>
+      <!-- <dt><strong><%= model_class.human_attribute_name(:setup) %>:</strong></dt>
+      <dd><%= @exercise.setup %></dd> -->
+      <dt><strong><%= model_class.human_attribute_name(:conclusion) %>:</strong></dt>
+      <dd><%= @exercise.conclusion %></dd>
+    </dl>
 
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:title) %>:</strong></dt>
-  <dd><%= @exercise.title %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:summary) %>:</strong></dt>
-  <dd><%= @exercise.summary %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:lesson_id) %>:</strong></dt>
-  <dd><%= @exercise.lesson_id %></dd>
-  <!-- <dt><strong><%= model_class.human_attribute_name(:setup) %>:</strong></dt>
-  <dd><%= @exercise.setup %></dd> -->
-  <dt><strong><%= model_class.human_attribute_name(:conclusion) %>:</strong></dt>
-  <dd><%= @exercise.conclusion %></dd>
-</dl>
-
-<%= link_to t('.back', :default => t("helpers.links.back")),
-              exercises_path, :class => 'btn btn-default'  %>
-<%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_exercise_path(@exercise), :class => 'btn btn-default' %>
-<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              exercise_path(@exercise),
-              :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-danger' %>
-
-<%= render 'board', setup: @exercise.setup %>
+    <%= link_to t('.back', :default => t("helpers.links.back")),
+                  exercises_path, :class => 'btn btn-default'  %>
+    <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                  edit_exercise_path(@exercise), :class => 'btn btn-default' %>
+    <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                  exercise_path(@exercise),
+                  :method => 'delete',
+                  :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                  :class => 'btn btn-danger' %>
+  </div>
+</div>
