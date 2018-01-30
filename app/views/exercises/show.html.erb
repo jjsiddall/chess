@@ -8,8 +8,8 @@
   </div>
   <div class="col-md-4">
     <p>Moves</p>
-    <% @exercise.moves.each_with_index do |move, index| %>
-      <%= link_to "Move #{index}","#", class: "next-move", data: {piece: move.piece, square: move.square} %> <br>
+    <% @exercise.moves.each do |move| %>
+      <%= link_to move.piece_symbol+move.square,"#", class: "move", data: {piece: move.piece, square: move.square} %> <br>
     <% end %>
   </div>
   <div class="col-md-4">

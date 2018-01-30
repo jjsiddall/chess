@@ -21,6 +21,10 @@
 .dark{ background-color: #555555; }
 .no-border{border:none;}
 
-.piece{ text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;}
+.piece{
+  margin: 1px 0 0 5px;
+  position:absolute;
+  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+}
 .black{ color: black; }
 .white{ color: gray; }
