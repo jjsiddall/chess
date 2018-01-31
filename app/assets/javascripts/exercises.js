@@ -1,7 +1,7 @@
 window.onload = function() {
-  var draggables = $('.square');
-  console.log(document.querySelector('.board'));
-  dragula([document.querySelector('.board')]);
+  var draggables = $('.square').toArray();
+  console.log(draggables);
+  dragula(draggables);
   // dragula([document.querySelector('.square')])
   // dragula([draggables]);
 }
