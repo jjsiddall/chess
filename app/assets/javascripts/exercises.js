@@ -1,3 +1,12 @@
+window.onload = function() {
+  var draggables = $('.square');
+  console.log(document.querySelector('.board'));
+  dragula([document.querySelector('.board')]);
+  // dragula([document.querySelector('.square')])
+  // dragula([draggables]);
+}
+
+
 $('.exercises.show').ready(function() {
   $('.move').on('click', function(e) {
       e.preventDefault();
@@ -11,6 +20,5 @@ $('.exercises.show').ready(function() {
          }, 500 , function() {
            square.append(piece);
         });
-
   });
 });
