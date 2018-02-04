@@ -16,22 +16,21 @@ $('.exercises.show').ready(function() {
 
 $('.exercises.edit').ready(function() {
   dragula($('.square').toArray()).on('drop', function () {
-     generate_setup();
+    $("#exercise_setup").text(JSON.stringify(generate_setup()).replace(/:/g, "=>"));
   });
 });
 
-function generate_setup() {
-  $('.square').each( function( index, element ){
-
-
+function generate_setup() { //generates a Setup Object
+  var setup = new Object(); //object to hold the board setup
+  $('.square').each( function( index, element ){ //go thru each square of the board looking for pieces
     square = $(element); //get the square
     square_id = square.attr('id'); //get the id of the square
     piece = square.children( ".piece" ); //get object on the square
     piece_html = piece.html(); //get the html of the piece on the square
     piece_id = piece.attr('id'); //get the id of the piece on the square
-
     if ((piece_html != undefined) && (piece_id != undefined) && (square_id != undefined)){
-      console.log(square_id + " " + piece_html + " " + piece_id);
+      setup[square_id] = {html:piece_html, id:piece_id} //adds piece to the Setup Object
     }
   });
+  return setup; //returns the Setup Object
 }

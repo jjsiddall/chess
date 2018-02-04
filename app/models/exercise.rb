@@ -3,10 +3,42 @@ class Exercise < ApplicationRecord
   belongs_to :lesson
   has_many :moves
 
-  def standard_setup
-    self.update(setup: {"a1":["&#9820;","wr1"],"b1":["&#9822;","wn1"],"c1":["&#9821;","wb1"],"d1":["&#9819;","wq1"],"e1":["&#9818;","wk1"],"f1":["&#9821;","wb2"],"g1":["&#9822;","wn2"],"h1":["&#9820;","wr2"],"a2":["&#9823;","wp1"],"b2":["&#9823;","wp2"],"c2":["&#9823;","wp3"],"d2":["&#9823;","wp4"],"e2":["&#9823;","wp5"],"f2":["&#9823;","wp6"],"g2":["&#9823;","wp7"],"h2":["&#9823;","wp8"],"a7":["&#9823;","bp1"],"b7":["&#9823;","bp2"],"c7":["&#9823;","bp3"],"d7":["&#9823;","bp4"],"e7":["&#9823;","bp5"],"f7":["&#9823;","bp6"],"g7":["&#9823;","bp7"],"h7":["&#9823;","bp8"],"a8":["&#9820;","br1"],"b8":["&#9822;","bn1"],"c8":["&#9821;","bb1"],"d8":["&#9819;","bq1"],"e8":["&#9818;","bk1"],"f8":["&#9821;","bb2"],"g8":["&#9822;","bn2"],"h8":["&#9820;","br2"]})
-  end
   def empty_setup
     self.update(setup: {})
+  end
+  def standard_setup
+    self.update(setup: {
+      a1:{html:"♜",id:"wr1"},
+      b1:{html:"♞",id:"wn1"},
+      c1:{html:"♝",id:"wb1"},
+      d1:{html:"♛",id:"wq1"},
+      e1:{html:"♚",id:"wk1"},
+      f1:{html:"♝",id:"wb2"},
+      g1:{html:"♞",id:"wn2"},
+      h1:{html:"♜",id:"wr2"},
+      a2:{html:"♟",id:"wp1"},
+      b2:{html:"♟",id:"wp2"},
+      c2:{html:"♟",id:"wp3"},
+      d2:{html:"♟",id:"wp4"},
+      e2:{html:"♟",id:"wp5"},
+      f2:{html:"♟",id:"wp6"},
+      g2:{html:"♟",id:"wp7"},
+      h2:{html:"♟",id:"wp8"},
+      a7:{html:"♟",id:"bp1"},
+      b7:{html:"♟",id:"bp2"},
+      c7:{html:"♟",id:"bp3"},
+      d7:{html:"♟",id:"bp4"},
+      e7:{html:"♟",id:"bp5"},
+      f7:{html:"♟",id:"bp6"},
+      g7:{html:"♟",id:"bp7"},
+      h7:{html:"♟",id:"bp8"},
+      a8:{html:"♜",id:"br1"},
+      b8:{html:"♞",id:"bn1"},
+      c8:{html:"♝",id:"bb1"},
+      d8:{html:"♛",id:"bq1"},
+      e8:{html:"♚",id:"bk1"},
+      f8:{html:"♝",id:"bb2"},
+      g8:{html:"♞",id:"bn2"},
+      h8:{html:"♜",id:"br2"}})
   end
 end
