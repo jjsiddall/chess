@@ -1,42 +1,23 @@
+<% used_pieces = pieces_on_the_board(setup) %>
 <div class="pieces">
   <div class="row for-board">
-    <div class="square"><div class="piece black" id="br1">♜</div></div>
-    <div class="square"><div class="piece black" id="bn1">♞</div></div>
-    <div class="square"><div class="piece black" id="bb1">♝</div></div>
-    <div class="square"><div class="piece black" id="bq1">♛</div></div>
-    <div class="square"><div class="piece black" id="bk1">♚</div></div>
-    <div class="square"><div class="piece black" id="bb2">♝</div></div>
-    <div class="square"><div class="piece black" id="bn2">♞</div></div>
-    <div class="square"><div class="piece black" id="br2">♜</div></div>
+    <% [{"id"=>"br1","html"=>"♜"},{"id"=>"bn1","html"=>"♞"},{"id"=>"bb1","html"=>"♝"},{"id"=>"bq1","html"=>"♛"},{"id"=>"bk1","html"=>"♚"},{"id"=>"bb2","html"=>"♝"},{"id"=>"bn2","html"=>"♞"},{"id"=>"br2","html"=>"♜"}].each do |piece| %>
+      <%= piece_square("black", piece['id'], piece['html'], used_pieces) %>
+    <% end %>
   </div>
   <div class="row for-board">
-    <div class="square"><div class="piece black" id="bp1">♟</div></div>
-    <div class="square"><div class="piece black" id="bp2">♟</div></div>
-    <div class="square"><div class="piece black" id="bp3">♟</div></div>
-    <div class="square"><div class="piece black" id="bp4">♟</div></div>
-    <div class="square"><div class="piece black" id="bp5">♟</div></div>
-    <div class="square"><div class="piece black" id="bp6">♟</div></div>
-    <div class="square"><div class="piece black" id="bp7">♟</div></div>
-    <div class="square"><div class="piece black" id="bp8">♟</div></div>
+    <% (1..8).each do |index| %>
+      <%= piece_square("black", "bp#{index}", "♟", used_pieces) %>
+    <% end %>
   </div>
   <div class="row for-board">
-    <div class="square"><div class="piece white" id="wp1">♟</div></div>
-    <div class="square"><div class="piece white" id="wp2">♟</div></div>
-    <div class="square"><div class="piece white" id="wp3">♟</div></div>
-    <div class="square"><div class="piece white" id="wp4">♟</div></div>
-    <div class="square"><div class="piece white" id="wp5">♟</div></div>
-    <div class="square"><div class="piece white" id="wp6">♟</div></div>
-    <div class="square"><div class="piece white" id="wp7">♟</div></div>
-    <div class="square"><div class="piece white" id="wp8">♟</div></div>
+    <% (1..8).each do |index| %>
+      <%= piece_square("white", "wp#{index}", "♟", used_pieces) %>
+    <% end %>
   </div>
   <div class="row for-board">
-    <div class="square"><div class="piece white" id="wr1">♜</div></div>
-    <div class="square"><div class="piece white" id="wn1">♞</div></div>
-    <div class="square"><div class="piece white" id="wb1">♝</div></div>
-    <div class="square"><div class="piece white" id="wq1">♛</div></div>
-    <div class="square"><div class="piece white" id="wk1">♚</div></div>
-    <div class="square"><div class="piece white" id="wb2">♝</div></div>
-    <div class="square"><div class="piece white" id="wn2">♞</div></div>
-    <div class="square"><div class="piece white" id="wr2">♜</div></div>
+    <% [{"id"=>"wr1","html"=>"♜"},{"id"=>"wn1","html"=>"♞"},{"id"=>"wb1","html"=>"♝"},{"id"=>"wq1","html"=>"♛"},{"id"=>"wk1","html"=>"♚"},{"id"=>"wb2","html"=>"♝"},{"id"=>"wn2","html"=>"♞"},{"id"=>"wr2","html"=>"♜"}].each do |piece| %>
+      <%= piece_square("white", piece['id'], piece['html'], used_pieces) %>
+    <% end %>
   </div>
 </div>
