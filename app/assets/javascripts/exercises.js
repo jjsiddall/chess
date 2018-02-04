@@ -16,7 +16,7 @@ $('.exercises.show').ready(function() {
 
 $('.exercises.edit').ready(function() {
   dragula($('.square').toArray()).on('drop', function () {
-    $("#exercise_setup").text(JSON.stringify(generate_setup()).replace(/:/g, "=>"));
+    $("#exercise_setup").val(JSON.stringify(generate_setup()).replace(/:/g, "=>"));
   });
 });
 
