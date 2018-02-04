@@ -16,7 +16,7 @@ RSpec.describe "exercises/edit", type: :view do
 
       assert_select "select[name=?]", "exercise[lesson_id]"
 
-      assert_select "textarea[name=?]", "exercise[setup]"
+      # assert_select "textarea[name=?]", "exercise[setup]"
 
       assert_select "textarea[name=?]", "exercise[conclusion]"
     end

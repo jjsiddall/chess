@@ -3,7 +3,7 @@ FactoryBot.define do
     title "title-string"
     summary "summary-text"
     lesson
-    setup '{"a1"=>["&#9820;","white","wr1"]}'
+    setup '{"a1"=>{"html"=>"♜","id"=>"wr1"}}'
     conclusion "conclusion-text"
 
     trait :invalid do
