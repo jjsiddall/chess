@@ -15,7 +15,8 @@ $('.exercises.show').ready(function() {
 });
 
 $('.exercises.edit').ready(function() {
-  dragula($('.square').toArray()).on('drop', function () {
+  dragula($('.square').toArray()).on('drop', function (el) {
+    $(el).siblings().remove();//removes any elements already in the square moved to
     $("#exercise_setup").val(JSON.stringify(generate_setup()).replace(/:/g, "=>"));
   });
 });
