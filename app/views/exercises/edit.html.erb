@@ -2,10 +2,29 @@
 <div class="page-header">
   <h1><%=t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => model_class.model_name.human.titleize %></h1>
 </div>
-<div class="col-md-6">
-  <%= render :partial => 'form' %>
+<div class="col-md-7">
+  <div class="row">
+    <div class="col-md-7">
+      <%= render 'board', setup: @exercise.setup, edit: true %>
+    </div>
+    <div class="col-md-5">
+      <%= render 'pieces', setup: @exercise.setup  %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-condensed table-bordered">
+       <% @exercise.moves.reverse.each do |move| %>
+        <tr class="move">
+          <td><span class="<%= move.piece_color %>"><%= move.piece_symbol_number %></span></td>
+          <td><%= move.square %></td>
+          <td><%= move.summary %></td>
+        </tr>
+       <% end %>
+      </table>
+    </div>
+  </div>
 </div>
-<div class="col-md-6">
-  <%= render 'board', setup: @exercise.setup %>
-  <%= render 'pieces', setup: @exercise.setup  %>
+<div class="col-md-5">
+  <%= render :partial => 'form' %>
 </div>

@@ -26,5 +26,8 @@
   position:absolute;
   text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
 }
+body.edit .piece{
+  margin: auto;
+}
 .black{ color: black; }
 .white{ color: gray; }

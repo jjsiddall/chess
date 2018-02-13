@@ -30,7 +30,7 @@ function generate_setup() { //generates a Setup Object
     piece_html = piece.html(); //get the html of the piece on the square
     piece_id = piece.attr('id'); //get the id of the piece on the square
     if ((piece_html != undefined) && (piece_id != undefined) && (square_id != undefined)){
-      setup[square_id] = {html:piece_html, id:piece_id} //adds piece to the Setup Object
+      setup[square_id] = {html:piece_html.charAt(0), id:piece_id} //adds piece to the Setup Object
     }
   });
   return setup; //returns the Setup Object

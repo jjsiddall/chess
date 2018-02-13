@@ -1,9 +1,12 @@
+<% edit = edit.nil? ? false : true %>
+<% puts edit %>
+<% puts "****************************************" %>
 <div class="board">
  <% 8.downto(1) do |rank| %>
   <div class="row for-board">
    <div class="square no-border"><%= rank %></div>
    <% 1.upto(8) do |file| %>
-    <%= board_square(rank, file, setup) %>
+    <%= board_square(rank, file, setup, edit) %>
    <% end %>
   </div>
  <% end %>

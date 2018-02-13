@@ -8,8 +8,10 @@
 
 lessonPawn = Lesson.create({title: "seed-Pawns", summary: "seed-A lesson dedicated to Pawns"})
 
-exercisePawn1 = Exercise.create({lesson: lessonPawn, title: "seed-Pawn1", summary: "seed-Pawn moves forward 1", setup: "",conclusion: "seed-The Pawn moved forward 1"})
-exercisePawn2 = Exercise.create({lesson: lessonPawn, title: "seed-Rook1", summary: "seed-Rook moves forward", setup: {"a1"=>["&#9820;", "white", "wr1"]}, conclusion: "seed-The Rook moved forward"})
+exercisePawn1 = Exercise.create({lesson: lessonPawn, title: "seed-Pawn1", summary: "seed-Pawn moves forward 1", conclusion: "seed-The Pawn moved forward 1"})
+exercisePawn2 = Exercise.create({lesson: lessonPawn, title: "seed-Rook1", summary: "seed-Rook moves forward", conclusion: "seed-The Rook moved forward"})
+exercisePawn1.standard_setup
+exercisePawn2.standard_setup
 
 Move.create([
   # moves for exercisePawn1
